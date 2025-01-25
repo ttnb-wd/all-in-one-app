@@ -1,0 +1,276 @@
+.calendar-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 20px;
+  background: linear-gradient(145deg, #ffffff, #f3f4f6);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.calendar-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Override react-calendar default styles */
+.react-calendar {
+  width: 100% !important;
+  border: none !important;
+  background: transparent !important;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.react-calendar__tile {
+  padding: 1em 0.5em !important;
+  font-size: 0.9em;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+  .calendar-container {
+    margin: 0;
+    padding: 10px;
+    border-radius: 0;
+    max-width: 100%;
+    box-shadow: none;
+    background: #ffffff;
+  }
+
+  .calendar-container:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .react-calendar {
+    font-size: 14px;
+  }
+
+  .react-calendar__tile {
+    padding: 0.8em 0.3em !important;
+    font-size: 0.85em;
+  }
+
+  .react-calendar__navigation button {
+    padding: 8px !important;
+    font-size: 1em !important;
+  }
+
+  .note-modal {
+    width: 90%;
+    margin: 0 auto;
+    padding: 15px;
+  }
+
+  .note-input {
+    font-size: 14px;
+  }
+
+  .note-button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+/* Extra Small Devices */
+@media screen and (max-width: 480px) {
+  .calendar-container {
+    margin: 0;
+    padding: 5px;
+  }
+
+  .react-calendar {
+    font-size: 12px;
+  }
+
+  .react-calendar__tile {
+    padding: 0.6em 0.2em !important;
+    font-size: 0.8em;
+  }
+
+  .react-calendar__navigation button {
+    padding: 6px !important;
+    font-size: 0.9em !important;
+  }
+
+  .note-modal {
+    width: 95%;
+    padding: 12px;
+  }
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background: rgba(99, 102, 241, 0.1) !important;
+  border-radius: 8px;
+  transform: scale(1.1);
+}
+
+.react-calendar__tile--active {
+  background: #6366f1 !important;
+  border-radius: 8px;
+  color: white !important;
+  opacity: 1 !important;
+  transform: scale(1.05);
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: #4f46e5 !important;
+  opacity: 1 !important;
+  transform: scale(1.1);
+}
+
+/* Add this new rule to ensure button states don't affect opacity */
+.react-calendar__tile--active.react-calendar__tile--hasActive {
+  opacity: 1 !important;
+  background: #6366f1 !important;
+}
+
+.react-calendar__navigation {
+  margin-bottom: 20px;
+}
+
+.react-calendar__navigation button {
+  font-size: 1.1em;
+  color: #4f46e5;
+  transition: all 0.3s ease;
+  background: transparent !important;
+  min-width: 44px;
+  margin: 0 8px;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background: rgba(99, 102, 241, 0.1) !important;
+  border-radius: 8px;
+}
+
+.react-calendar__month-view__weekdays {
+  font-weight: 600 !important;
+  color: #6366f1;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  margin-bottom: 8px;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #ec4899 !important;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #9ca3af !important;
+}
+
+.react-calendar__tile--now {
+  background: rgba(99, 102, 241, 0.15) !important;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.react-calendar__tile--now:enabled:hover {
+  background: rgba(99, 102, 241, 0.25) !important;
+}
+
+.calendar-note {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: #6366f1;
+  border-radius: 50%;
+}
+
+.note-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  width: 90%;
+  max-width: 400px;
+  animation: modalFadeIn 0.3s ease;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 999;
+}
+
+.note-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  margin: 10px 0;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.note-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.note-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.note-button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.save-button {
+  background: #6366f1;
+  color: white;
+}
+
+.save-button:hover {
+  background: #4f46e5;
+}
+
+.cancel-button {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.cancel-button:hover {
+  background: #d1d5db;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+} 

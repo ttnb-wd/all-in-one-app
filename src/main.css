@@ -1,0 +1,56 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar-container {
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.calendar-container:hover {
+  transform: scale(1.02);
+}
+
+.react-calendar {
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  border: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+.react-calendar__tile {
+  max-width: 100%;
+  text-align: center;
+  padding: 15px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.react-calendar__tile:hover {
+  background-color: #e0e0e0;
+}
+
+.react-calendar__tile--active {
+  background-color: #007bff;
+  color: white;
+  border-radius: 10px;
+}
+
+.react-calendar__tile--now {
+  background-color: #ffeb3b;
+  border-radius: 10px;
+}
