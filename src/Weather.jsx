@@ -62,6 +62,18 @@ const mockWeatherData = {
       pressure: 1020
     },
     wind: { speed: 6.1 }
+  },
+  'yangon': {
+    name: 'Yangon',
+    sys: { country: 'MM' },
+    weather: [{ icon: '11d', description: 'thunderstorm' }],
+    main: {
+      temp: 32,
+      feels_like: 36,
+      humidity: 85,
+      pressure: 1008
+    },
+    wind: { speed: 3.2 }
   }
 };
 
@@ -71,6 +83,7 @@ const Weather = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
 
   const suggestions = useMemo(() => {
     const searchTerm = city.toLowerCase().trim();
@@ -83,6 +96,35 @@ const Weather = () => {
         country: mockWeatherData[cityName].sys.country
       }));
   }, [city]);
+
+  const handleKeyDown = (e) => {
+    if (!showSuggestions || suggestions.length === 0) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setSelectedSuggestionIndex(prev => 
+          prev < suggestions.length - 1 ? prev + 1 : prev
+        );
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setSelectedSuggestionIndex(prev => 
+          prev > 0 ? prev - 1 : prev
+        );
+        break;
+      case 'Enter':
+        if (selectedSuggestionIndex >= 0) {
+          e.preventDefault();
+          handleSuggestionClick(suggestions[selectedSuggestionIndex].name);
+        }
+        break;
+      case 'Escape':
+        setShowSuggestions(false);
+        setSelectedSuggestionIndex(-1);
+        break;
+    }
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -106,6 +148,7 @@ const Weather = () => {
   const handleInputChange = (e) => {
     setCity(e.target.value);
     setShowSuggestions(true);
+    setSelectedSuggestionIndex(-1);
   };
 
   const handleSuggestionClick = (cityName) => {
@@ -132,6 +175,7 @@ const Weather = () => {
             type="text"
             value={city}
             onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
             onFocus={() => setShowSuggestions(true)}
             placeholder="Try: London, Paris, New York, Tokyo, Sydney"
             className="city-input"
@@ -143,10 +187,11 @@ const Weather = () => {
         
         {showSuggestions && suggestions.length > 0 && (
           <ul className="suggestions-list">
-            {suggestions.map((suggestion) => (
+            {suggestions.map((suggestion, index) => (
               <li
                 key={`${suggestion.name}-${suggestion.country}`}
                 onClick={() => handleSuggestionClick(suggestion.name)}
+                className={index === selectedSuggestionIndex ? 'selected' : ''}
               >
                 {suggestion.name}, {suggestion.country}
               </li>
