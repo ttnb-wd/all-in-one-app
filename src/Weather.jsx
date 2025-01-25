@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import './Weather.css';
 
 // Mock weather data for different cities
@@ -70,10 +70,24 @@ const Weather = () => {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const suggestions = useMemo(() => {
+    const searchTerm = city.toLowerCase().trim();
+    if (!searchTerm) return [];
+    
+    return Object.keys(mockWeatherData)
+      .filter(cityName => cityName.includes(searchTerm))
+      .map(cityName => ({
+        name: mockWeatherData[cityName].name,
+        country: mockWeatherData[cityName].sys.country
+      }));
+  }, [city]);
 
   const handleSearch = (e) => {
     e.preventDefault();
     const searchCity = city.trim().toLowerCase();
+    setShowSuggestions(false);
     
     setLoading(true);
     // Simulate API delay
@@ -89,22 +103,57 @@ const Weather = () => {
     }, 500);
   };
 
+  const handleInputChange = (e) => {
+    setCity(e.target.value);
+    setShowSuggestions(true);
+  };
+
+  const handleSuggestionClick = (cityName) => {
+    setCity(cityName);
+    setShowSuggestions(false);
+    
+    setLoading(true);
+    setTimeout(() => {
+      if (mockWeatherData[cityName.toLowerCase()]) {
+        setWeather(mockWeatherData[cityName.toLowerCase()]);
+        setError(null);
+      }
+      setLoading(false);
+    }, 500);
+  };
+
   return (
     <div className="weather-container">
       <h1>Weather Forecast</h1>
       
-      <form onSubmit={handleSearch} className="search-form">
-        <input
-          type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="Try: London, Paris, New York, Tokyo, Sydney"
-          className="city-input"
-        />
-        <button type="submit" className="search-button">
-          Search
-        </button>
-      </form>
+      <div className="search-container">
+        <form onSubmit={handleSearch} className="search-form">
+          <input
+            type="text"
+            value={city}
+            onChange={handleInputChange}
+            onFocus={() => setShowSuggestions(true)}
+            placeholder="Try: London, Paris, New York, Tokyo, Sydney"
+            className="city-input"
+          />
+          <button type="submit" className="search-button">
+            Search
+          </button>
+        </form>
+        
+        {showSuggestions && suggestions.length > 0 && (
+          <ul className="suggestions-list">
+            {suggestions.map((suggestion) => (
+              <li
+                key={`${suggestion.name}-${suggestion.country}`}
+                onClick={() => handleSuggestionClick(suggestion.name)}
+              >
+                {suggestion.name}, {suggestion.country}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
       {loading && <div className="loading">Loading...</div>}
       
