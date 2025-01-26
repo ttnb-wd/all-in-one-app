@@ -196,3 +196,59 @@ canvas.active {
     font-size: 14px;
   }
 }
+
+/* Mobile Controls */
+.mobile-controls {
+  display: none;
+  width: 100%;
+  max-width: 800px;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.movement-controls {
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.shoot-button {
+  position: absolute;
+  right: 20px;
+  bottom: 0;
+}
+
+.control-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  touch-action: manipulation;
+}
+
+/* Show mobile controls only on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .mobile-controls {
+    display: block;
+  }
+  
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .space-invaders {
+    padding-bottom: 100px;
+  }
+}

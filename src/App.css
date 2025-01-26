@@ -125,8 +125,9 @@
   }
 
   .nav-list.active {
-    max-height: 300px;
+    max-height: 500px;
     opacity: 1;
+    pointer-events: all;
   }
 
   .nav-list li {
@@ -167,6 +168,51 @@
     background-color: #eef2ff;
     color: #4f46e5;
     box-shadow: none;
+  }
+
+  .submenu {
+    position: static;
+    width: 100%;
+    background: #f8fafc;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    max-height: none;
+    opacity: 1;
+    pointer-events: all;
+    margin: 0;
+    display: none;
+  }
+
+  .submenu.active {
+    display: block;
+    margin: 0;
+  }
+
+  .submenu .nav-link {
+    padding-left: 2.5rem;
+    color: #4f46e5;
+    font-size: 0.95rem;
+    transform: none;
+  }
+
+  .submenu .nav-link:hover {
+    background-color: #eef2ff;
+    transform: none;
+  }
+
+  .games-dropdown {
+    width: 100%;
+  }
+
+  .games-dropdown .nav-link {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .arrow {
+    position: absolute;
+    right: 1rem;
   }
 }
 
@@ -281,22 +327,44 @@
 @media screen and (max-width: 768px) {
   .submenu {
     position: static;
-    background: white;
+    width: 100%;
+    background: #f8fafc;
     box-shadow: none;
-    padding-left: 20px;
-    margin-top: 0;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .submenu.active {
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: all;
   }
 
   .submenu .nav-link {
+    padding-left: 2.5rem;
     color: #4f46e5;
-    background: transparent;
+    font-size: 0.95rem;
   }
 
   .submenu .nav-link:hover {
-    background: #f8fafc;
+    background-color: #eef2ff;
   }
 
   .submenu .nav-link.active {
-    background: #eef2ff;
+    background-color: #e0e7ff;
+  }
+
+  .games-dropdown {
+    width: 100%;
+  }
+
+  .games-dropdown .nav-link {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .arrow {
+    position: absolute;
+    right: 1rem;
   }
 }

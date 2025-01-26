@@ -57,6 +57,28 @@ function TicTacToe() {
     }
   };
 
+  const handleTouch = (e, i) => {
+    e.preventDefault(); // Prevent double-tap zoom and other touch events
+    e.stopPropagation(); // Stop event bubbling
+    if (board[i] || gameOver) return;
+
+    const newBoard = board.slice();
+    newBoard[i] = xIsNext ? 'X' : 'O';
+    setBoard(newBoard);
+    setXIsNext(!xIsNext);
+
+    const winner = calculateWinner(newBoard);
+    if (winner || newBoard.every(square => square)) {
+      setGameOver(true);
+    }
+  };
+
+  const handleResetTouch = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    resetGame();
+  };
+
   const resetGame = () => {
     setBoard(Array(9).fill(null));
     setXIsNext(true);
@@ -80,8 +102,10 @@ function TicTacToe() {
             key={i} 
             className={`square ${square ? 'filled' : ''}`} 
             onClick={() => handleClick(i)}
+            onTouchEnd={(e) => handleTouch(e, i)}
+            onTouchStart={(e) => e.preventDefault()}
           >
-            {square}
+            <span>{square}</span>
           </button>
         ))}
         {winner && (
@@ -102,7 +126,12 @@ function TicTacToe() {
           </div>
         )}
       </div>
-      <button className="reset-button" onClick={resetGame}>
+      <button 
+        className="reset-button" 
+        onClick={resetGame}
+        onTouchEnd={handleResetTouch}
+        onTouchStart={(e) => e.preventDefault()}
+      >
         Reset Game
       </button>
     </div>

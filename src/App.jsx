@@ -67,6 +67,14 @@ function App() {
               <AiOutlineHome />
               Home
             </Link>
+            <Link 
+              to="/tic-tac-toe" 
+              className={`nav-link ${location.pathname === '/tic-tac-toe' ? 'active' : ''}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <FaGamepad />
+              Tic Tac Toe
+            </Link>
           </li>
           <li>
             <Link 
@@ -128,9 +136,9 @@ function App() {
                   Space Invaders
                 </Link>
               </li>
-              <li>
-                <Link 
-                  to="/tic-tac-toe" 
+               <li>
+                <Link
+                  to="/tic-tac-toe"
                   className={`nav-link ${location.pathname === '/tic-tac-toe' ? 'active' : ''}`}
                   onClick={() => setIsMenuOpen(false)}
                 >

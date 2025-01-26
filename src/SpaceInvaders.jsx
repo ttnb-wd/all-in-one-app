@@ -257,6 +257,24 @@ const SpaceInvaders = () => {
     keys.current = {};
   };
 
+  const handleTouchStart = (action) => {
+    if (action === 'left') {
+      keys.current.ArrowLeft = true;
+    } else if (action === 'right') {
+      keys.current.ArrowRight = true;
+    } else if (action === 'shoot') {
+      handleKeyDown({ key: ' ' });
+    }
+  };
+
+  const handleTouchEnd = (action) => {
+    if (action === 'left') {
+      keys.current.ArrowLeft = false;
+    } else if (action === 'right') {
+      keys.current.ArrowRight = false;
+    }
+  };
+
   return (
     <div className="space-invaders">
       <div className="game-header">
@@ -277,6 +295,7 @@ const SpaceInvaders = () => {
           <div className="instructions">
             <p>Use ← → to move</p>
             <p>Space to shoot</p>
+            <p>Or use on-screen controls on mobile</p>
           </div>
         </div>
       ) : null}
@@ -286,6 +305,30 @@ const SpaceInvaders = () => {
         height={800}
         className={gameStarted && !gameOver ? 'active' : ''}
       />
+      <div className="mobile-controls">
+        <div className="movement-controls">
+          <button 
+            className="control-button"
+            onTouchStart={() => handleTouchStart('left')}
+            onTouchEnd={() => handleTouchEnd('left')}
+          >
+            ←
+          </button>
+          <button 
+            className="control-button"
+            onTouchStart={() => handleTouchStart('right')}
+            onTouchEnd={() => handleTouchEnd('right')}
+          >
+            →
+          </button>
+        </div>
+        <button 
+          className="control-button shoot-button"
+          onTouchStart={() => handleTouchStart('shoot')}
+        >
+          🚀
+        </button>
+      </div>
     </div>
   );
 };
