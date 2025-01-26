@@ -16,7 +16,10 @@ const SpaceInvaders = () => {
     y: 0,
     width: 60,
     height: 60,
-    speed: 5
+    speed: 5,
+    ships: [
+      { offset: 0 }  // single center ship
+    ]
   });
 
   const aliens = useRef([]);
@@ -58,9 +61,11 @@ const SpaceInvaders = () => {
     keys.current[e.key] = true;
     
     if (e.key === ' ') {
+      // Create single bullet shot
       bullets.current.push({
         x: player.current.x + player.current.width / 2,
-        y: player.current.y
+        y: player.current.y,
+        angle: 0  // Straight up
       });
     }
   };
@@ -91,8 +96,17 @@ const SpaceInvaders = () => {
     
     // Initialize game state
     const initGame = () => {
-      player.current.x = canvas.width / 2 - player.current.width / 2;
-      player.current.y = canvas.height - player.current.height - 10;
+      // Initialize player position and ships
+      player.current = {
+        x: canvas.width / 2 - 30,
+        y: canvas.height - 100,
+        width: 60,
+        height: 60,
+        speed: 5,
+        ships: [
+          { offset: 0 }  // single center ship
+        ]
+      };
       
       // Create aliens
       aliens.current = [];
@@ -118,6 +132,11 @@ const SpaceInvaders = () => {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
+      // Check if player is properly initialized
+      if (!player.current || !player.current.ships) {
+        initGame();
+      }
+      
       // Move player
       if (keys.current.ArrowLeft && player.current.x > 0) {
         player.current.x -= player.current.speed;
@@ -126,25 +145,28 @@ const SpaceInvaders = () => {
         player.current.x += player.current.speed;
       }
 
-      // Draw player
-      if (playerImage.current) {
-        ctx.drawImage(
-          playerImage.current,
-          player.current.x,
-          player.current.y,
-          player.current.width,
-          player.current.height
-        );
+      // Draw player ships
+      if (playerImage.current && player.current.ships) {
+        player.current.ships.forEach(ship => {
+          ctx.drawImage(
+            playerImage.current,
+            player.current.x + ship.offset,
+            player.current.y,
+            player.current.width,
+            player.current.height
+          );
+        });
       }
 
       // Move and draw bullets
       bullets.current.forEach((bullet, index) => {
         bullet.y -= config.bulletSpeed;
+        bullet.x += config.bulletSpeed * bullet.angle; // Add horizontal movement based on angle
         ctx.fillStyle = '#fff';
         ctx.fillRect(bullet.x, bullet.y, 5, 15);
 
         // Remove bullets that are off screen
-        if (bullet.y < 0) {
+        if (bullet.y < 0 || bullet.x < 0 || bullet.x > canvas.width) {
           bullets.current.splice(index, 1);
         }
 
@@ -261,7 +283,7 @@ const SpaceInvaders = () => {
       <canvas
         ref={canvasRef}
         width={800}
-        height={600}
+        height={800}
         className={gameStarted && !gameOver ? 'active' : ''}
       />
     </div>

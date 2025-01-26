@@ -11,14 +11,7 @@ import FlappyBird from './FlappyBird';
 import SpaceInvaders from './SpaceInvaders';
 import TicTacToe from './TicTacToe';
 import SocialDashboard from './SocialDashboard';
-
-function Home() {
-  return (
-    <div className="container">
-      <h1>Hello MotherFucker</h1>
-    </div>
-  );
-}
+import Portfolio from './Portfolio';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -152,7 +145,7 @@ function App() {
 
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Portfolio />} />
           <Route path="/calendar" element={<MyCalendar />} />
           <Route path="/weather" element={<Weather />} />
           <Route path="/social-dashboard" element={<SocialDashboard />} />

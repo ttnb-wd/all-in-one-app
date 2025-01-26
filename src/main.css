@@ -1,10 +1,10 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poppins', 'Roboto', sans-serif;
   background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  color: white;
+  color: #000;
   overflow-x: hidden;
 }
 
@@ -18,6 +18,7 @@ body {
   padding: 2rem;
   opacity: 0;
   animation: fadeIn 1s ease-in forwards;
+  color: #000;
 }
 
 @keyframes fadeIn {
@@ -26,13 +27,15 @@ body {
 }
 
 .hero-content {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   padding: 2.5rem;
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   transform: perspective(1000px);
   transition: transform 0.3s ease;
+  color: #000;
+  font-family: 'Poppins', sans-serif;
 }
 
 .hero-content:hover {
@@ -40,18 +43,24 @@ body {
 }
 
 .greeting-text {
-  font-size: 1.5rem;
-  color: #7f8fa6;
+  font-size: 1.8rem;
+  color: #000;
+  font-weight: 600;
   margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.5px;
 }
 
 .name-text {
   font-size: 4rem;
-  background: linear-gradient(45deg, #00b4d8, #90e0ef);
+  background: linear-gradient(45deg, #1a1a1a, #333333);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   margin: 1rem 0;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: -1px;
   animation: gradientShift 5s infinite alternate;
 }
 
@@ -69,13 +78,15 @@ body {
 }
 
 .project-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.95);
   padding: 1.5rem;
   border-radius: 15px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  color: #000;
+  font-family: 'Poppins', sans-serif;
 }
 
 .project-card::before {
@@ -144,4 +155,37 @@ body {
 .react-calendar__tile--now {
   background-color: #ffeb3b;
   border-radius: 10px;
+}
+
+/* Add font-weight to portfolio intro */
+.portfolio-intro {
+  color: #000;
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* If you want project titles bold */
+.project-card h3 {
+  color: #000;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Update project card text color */
+.project-card p {
+  color: #333;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Update body color for home page sections */
+.portfolio-container {
+  color: #000;
 }
