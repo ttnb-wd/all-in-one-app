@@ -1,26 +1,117 @@
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #f0f0f0;
+  background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  color: white;
+  overflow-x: hidden;
 }
 
-.calendar-container {
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+/* New hero section styles */
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-content {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transform: perspective(1000px);
   transition: transform 0.3s ease;
 }
 
-.calendar-container:hover {
-  transform: scale(1.02);
+.hero-content:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
 }
 
+.greeting-text {
+  font-size: 1.5rem;
+  color: #7f8fa6;
+  margin-bottom: 1rem;
+}
+
+.name-text {
+  font-size: 4rem;
+  background: linear-gradient(45deg, #00b4d8, #90e0ef);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 1rem 0;
+  animation: gradientShift 5s infinite alternate;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Project grid animation */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #00b4d8, #90e0ef);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .name-text {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content {
+    padding: 1.5rem;
+  }
+}
+
+/* Existing calendar styles below... */
 .react-calendar {
   width: 100%;
   max-width: 400px;

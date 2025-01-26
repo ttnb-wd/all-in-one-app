@@ -1,0 +1,39 @@
+.flappy-bird-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #87CEEB;
+  position: relative;
+}
+
+/* Add container scope to canvas selector */
+.flappy-bird-container canvas {
+  border: 2px solid #333;
+  border-radius: 8px;
+  background: #fff; /* Removed !important */
+}
+
+.game-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .flappy-bird-container canvas {
+    width: 90%;
+    height: auto;
+  }
+} 

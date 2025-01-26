@@ -1,0 +1,105 @@
+.social-dashboard {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-dashboard h1 {
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 2rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.platform-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.platform-header svg {
+  font-size: 1.5rem;
+}
+
+.platform-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #2d3748;
+}
+
+.label {
+  margin: 0;
+  color: #718096;
+  font-size: 0.9rem;
+}
+
+.growth {
+  grid-column: span 2;
+  text-align: center;
+  color: #48bb78;
+  font-weight: bold;
+  margin: 0.5rem 0 0 0;
+}
+
+/* Platform-specific colors */
+.twitter .platform-header svg {
+  color: #1DA1F2;
+}
+
+.facebook .platform-header svg {
+  color: #4267B2;
+}
+
+.instagram .platform-header svg {
+  color: #E1306C;
+}
+
+.linkedin .platform-header svg {
+  color: #0077B5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .social-dashboard {
+    padding: 1rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+} 
