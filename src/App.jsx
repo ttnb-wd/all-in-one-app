@@ -67,14 +67,6 @@ function App() {
               <AiOutlineHome />
               Home
             </Link>
-            <Link 
-              to="/tic-tac-toe" 
-              className={`nav-link ${location.pathname === '/tic-tac-toe' ? 'active' : ''}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <FaGamepad />
-              Tic Tac Toe
-            </Link>
           </li>
           <li>
             <Link 
