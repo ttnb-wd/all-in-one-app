@@ -85,6 +85,13 @@ function TicTacToe() {
     setGameOver(false);
   };
 
+  const handleModalClick = (e) => {
+    // Close modal only if clicking the overlay, not the modal content
+    if (e.target.className === 'modal-overlay') {
+      resetGame();
+    }
+  };
+
   const winner = calculateWinner(board);
   const status = winner 
     ? `Winner: ${winner}`
@@ -109,7 +116,7 @@ function TicTacToe() {
           </button>
         ))}
         {winner && (
-          <div className="modal-overlay">
+          <div className="modal-overlay" onClick={handleModalClick}>
             <Confetti
               width={modalSize.width}
               height={modalSize.height}

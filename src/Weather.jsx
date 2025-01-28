@@ -90,7 +90,7 @@ const Weather = () => {
     if (!searchTerm) return [];
     
     return Object.keys(mockWeatherData)
-      .filter(cityName => cityName.includes(searchTerm))
+      .filter(cityName => cityName.toLowerCase().includes(searchTerm))
       .map(cityName => ({
         name: mockWeatherData[cityName].name,
         country: mockWeatherData[cityName].sys.country
@@ -123,6 +123,8 @@ const Weather = () => {
         setShowSuggestions(false);
         setSelectedSuggestionIndex(-1);
         break;
+      default:
+        break;
     }
   };
 
@@ -132,13 +134,12 @@ const Weather = () => {
     setShowSuggestions(false);
     
     setLoading(true);
-    // Simulate API delay
     setTimeout(() => {
       if (mockWeatherData[searchCity]) {
         setWeather(mockWeatherData[searchCity]);
         setError(null);
       } else {
-        setError('City not found. Try: London, Paris, New York, Tokyo, or Sydney');
+        setError('City not found. Available cities: London, Paris, New York, Tokyo, Sydney, Yangon');
         setWeather(null);
       }
       setLoading(false);
@@ -146,9 +147,11 @@ const Weather = () => {
   };
 
   const handleInputChange = (e) => {
-    setCity(e.target.value);
-    setShowSuggestions(true);
+    const value = e.target.value;
+    setCity(value);
+    setShowSuggestions(value.trim().length > 0);
     setSelectedSuggestionIndex(-1);
+    setError(null);
   };
 
   const handleSuggestionClick = (cityName) => {
@@ -157,12 +160,19 @@ const Weather = () => {
     
     setLoading(true);
     setTimeout(() => {
-      if (mockWeatherData[cityName.toLowerCase()]) {
-        setWeather(mockWeatherData[cityName.toLowerCase()]);
+      const searchCity = cityName.toLowerCase();
+      if (mockWeatherData[searchCity]) {
+        setWeather(mockWeatherData[searchCity]);
         setError(null);
       }
       setLoading(false);
     }, 500);
+  };
+
+  const handleInputFocus = () => {
+    if (city.trim().length > 0) {
+      setShowSuggestions(true);
+    }
   };
 
   return (
@@ -176,9 +186,10 @@ const Weather = () => {
             value={city}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            onFocus={() => setShowSuggestions(true)}
-            placeholder="Try: London, Paris, New York, Tokyo, Sydney"
+            onFocus={handleInputFocus}
+            placeholder="Search city (e.g., London, Paris, Tokyo)"
             className="city-input"
+            autoComplete="off"
           />
           <button type="submit" className="search-button">
             Search

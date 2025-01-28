@@ -95,37 +95,74 @@
 }
 
 .modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
-  border-radius: 12px;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   overflow: hidden;
+  cursor: pointer;
 }
 
 .winner-modal {
   background: white;
-  padding: 0.8rem 1.2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   text-align: center;
-  animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  z-index: 101;
-  min-width: 150px;
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10000;
+  min-width: 250px;
+  max-width: 90%;
+  cursor: default;
+  transform: scale(1);
+  transition: transform 0.2s ease;
+}
+
+.winner-modal:hover {
+  transform: scale(1.02);
 }
 
 .winner-modal h2 {
   margin: 0;
   color: #333;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
   animation: bounce 1s infinite;
   white-space: nowrap;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
 
 @media (max-width: 480px) {
@@ -177,30 +214,13 @@
   }
 
   .winner-modal {
-    width: 80%;
-    max-width: 250px;
+    width: 85%;
+    min-width: auto;
+    max-width: 300px;
+    padding: 1.5rem;
   }
-}
 
-@keyframes popIn {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-5px);
-  }
-  60% {
-    transform: translateY(-3px);
+  .winner-modal h2 {
+    font-size: 1.4rem;
   }
 } 

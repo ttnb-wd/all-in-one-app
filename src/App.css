@@ -201,6 +201,10 @@
     transform: none;
   }
 
+  .submenu .nav-link.active {
+    background-color: #e0e7ff;
+  }
+
   .games-dropdown {
     width: 100%;
   }
@@ -251,7 +255,24 @@
 /* App container */
 .app {
   min-height: 100vh;
-  background-color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 70px;
+  min-height: calc(100vh - 70px);
+  background: linear-gradient(-45deg, #0a192f, #112240, #233554, #112240);
+  background-size: 400% 400%;
+  position: relative;
+  z-index: 0;
+}
+
+/* Add smooth page transitions */
+.main-content > * {
+  position: relative;
+  z-index: 1;
 }
 
 .games-dropdown {
