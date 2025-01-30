@@ -36,7 +36,6 @@ const router = createBrowserRouter(
     },
   }
 );
-
 function Root() {
   return (
     <div className="app">
