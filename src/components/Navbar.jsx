@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { FaHome, FaUser, FaBriefcase, FaEnvelope, FaGamepad, FaTools } from 'react-icons/fa';
+import { FaHome, FaUser, FaBriefcase, FaEnvelope, FaGamepad, FaTools, FaBlog, FaShoppingCart, FaStore, FaFileAlt } from 'react-icons/fa';
+import { useCart } from '../context/CartContext';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -10,6 +11,7 @@ const Navbar = () => {
   const navRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { getCartItemsCount } = useCart();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -77,8 +79,22 @@ const Navbar = () => {
         <Link to="/portfolio" className={`nav-item ${location.pathname === '/portfolio' ? 'active' : ''}`}>
           <span className="nav-text">Portfolio</span>
         </Link>
+        <Link to="/resume" className={`nav-item ${location.pathname === '/resume' ? 'active' : ''}`}>
+          <FaFileAlt />
+          <span className="nav-text">Resume</span>
+        </Link>
+        <Link to="/blog" className={`nav-item ${location.pathname.startsWith('/blog') ? 'active' : ''}`}>
+          <span className="nav-text">Blog</span>
+        </Link>
         <Link to="/contact" className={`nav-item ${location.pathname === '/contact' ? 'active' : ''}`}>
           <span className="nav-text">Contact</span>
+        </Link>
+        <Link to="/shop" className={`nav-item ${location.pathname.startsWith('/shop') ? 'active' : ''}`}>
+          <FaStore />
+          <span className="nav-text">Shop</span>
+        </Link>
+        <Link to="/signup" className={`nav-item ${location.pathname === '/signup' ? 'active' : ''}`}>
+          <span className="nav-text">Sign Up</span>
         </Link>
         <div className="games-dropdown">
           <button className="nav-item" onClick={toggleGames}>
@@ -121,6 +137,13 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+        <Link to="/cart" className={`nav-item cart-link ${location.pathname === '/cart' ? 'active' : ''}`}>
+          <FaShoppingCart />
+          <span className="nav-text">Cart</span>
+          {getCartItemsCount() > 0 && (
+            <span className="cart-count">{getCartItemsCount()}</span>
+          )}
+        </Link>
       </div>
       {(isMenuOpen || gamesOpen || appsOpen) && (
         <div className="navbar-overlay" onClick={closeDropdowns} />
