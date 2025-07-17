@@ -339,15 +339,20 @@ const Portfolio = () => {
           ))}
         </motion.div>
 
-        <motion.div 
-          className="portfolio-grid"
-          layout
-          variants={itemVariants}
-        >
-          <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={activeCategory}
+            className="portfolio-grid"
+            layout
+            variants={itemVariants}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
             {filteredItems.map((item, index) => (
               <PortfolioItem
-                key={`${item.id}-${activeCategory}`}
+                key={item.id}
                 id={item.id}
                 index={index}
                 moveItem={moveItem}
@@ -356,8 +361,8 @@ const Portfolio = () => {
                 onShowCalculator={() => setShowCalculatorModal(true)}
               />
             ))}
-          </AnimatePresence>
-        </motion.div>
+          </motion.div>
+        </AnimatePresence>
 
         <motion.div 
           className="portfolio-stats"

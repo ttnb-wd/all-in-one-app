@@ -9,7 +9,6 @@ const Navbar = () => {
   const [appsOpen, setAppsOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navRef = useRef(null);
-  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { getCartItemsCount } = useCart();
 
@@ -26,15 +25,6 @@ const Navbar = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleGames = (e) => {
@@ -62,38 +52,38 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`navbar ${isMenuOpen ? 'open' : ''} ${isScrolled ? 'scrolled' : ''}`} ref={navRef}>
+    <nav className={`navbar ${isMenuOpen ? 'open' : ''}`} ref={navRef}>
       <div className="nav-brand">
-        <Link to="/">Portfolio</Link>
+        <Link to="/" onClick={closeDropdowns}>Portfolio</Link>
       </div>
       <button className="nav-toggle" onClick={toggleMenu}>
         <span></span>
       </button>
       <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
-        <Link to="/" className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}>
+        <Link to="/" className={`nav-item ${location.pathname === '/' ? 'active' : ''}`} onClick={closeDropdowns}>
           <span className="nav-text">Home</span>
         </Link>
-        <Link to="/about" className={`nav-item ${location.pathname === '/about' ? 'active' : ''}`}>
+        <Link to="/about" className={`nav-item ${location.pathname === '/about' ? 'active' : ''}`} onClick={closeDropdowns}>
           <span className="nav-text">About</span>
         </Link>
-        <Link to="/portfolio" className={`nav-item ${location.pathname === '/portfolio' ? 'active' : ''}`}>
+        <Link to="/portfolio" className={`nav-item ${location.pathname === '/portfolio' ? 'active' : ''}`} onClick={closeDropdowns}>
           <span className="nav-text">Portfolio</span>
         </Link>
-        <Link to="/resume" className={`nav-item ${location.pathname === '/resume' ? 'active' : ''}`}>
+        <Link to="/resume" className={`nav-item ${location.pathname === '/resume' ? 'active' : ''}`} onClick={closeDropdowns}>
           <FaFileAlt />
           <span className="nav-text">Resume</span>
         </Link>
-        <Link to="/blog" className={`nav-item ${location.pathname.startsWith('/blog') ? 'active' : ''}`}>
+        <Link to="/blog" className={`nav-item ${location.pathname.startsWith('/blog') ? 'active' : ''}`} onClick={closeDropdowns}>
           <span className="nav-text">Blog</span>
         </Link>
-        <Link to="/contact" className={`nav-item ${location.pathname === '/contact' ? 'active' : ''}`}>
+        <Link to="/contact" className={`nav-item ${location.pathname === '/contact' ? 'active' : ''}`} onClick={closeDropdowns}>
           <span className="nav-text">Contact</span>
         </Link>
-        <Link to="/shop" className={`nav-item ${location.pathname.startsWith('/shop') ? 'active' : ''}`}>
+        <Link to="/shop" className={`nav-item ${location.pathname.startsWith('/shop') ? 'active' : ''}`} onClick={closeDropdowns}>
           <FaStore />
           <span className="nav-text">Shop</span>
         </Link>
-        <Link to="/signup" className={`nav-item ${location.pathname === '/signup' ? 'active' : ''}`}>
+        <Link to="/signup" className={`nav-item ${location.pathname === '/signup' ? 'active' : ''}`} onClick={closeDropdowns}>
           <span className="nav-text">Sign Up</span>
         </Link>
         <div className="games-dropdown">
@@ -137,7 +127,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <Link to="/cart" className={`nav-item cart-link ${location.pathname === '/cart' ? 'active' : ''}`}>
+        <Link to="/cart" className={`nav-item cart-link ${location.pathname === '/cart' ? 'active' : ''}`} onClick={closeDropdowns}>
           <FaShoppingCart />
           <span className="nav-text">Cart</span>
           {getCartItemsCount() > 0 && (

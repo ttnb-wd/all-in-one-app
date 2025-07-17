@@ -31,6 +31,7 @@ import FlappyBird from './FlappyBird';
 // Utility app components
 import Calendar from './Calendar';
 import Weather from './Weather';
+import SocialDashboard from './SocialDashboard';
 
 // Context providers for global state management
 import { ThemeProvider } from './context/ThemeContext';  // Theme switching (dark/light mode)
@@ -78,6 +79,9 @@ const router = createBrowserRouter(
         <Route path="calendar" element={<Calendar />} />         {/* /apps/calendar */}
         <Route path="weather" element={<Weather />} />           {/* /apps/weather */}
       </Route>
+
+      {/* Social Dashboard standalone route */}
+      <Route path="social-dashboard" element={<SocialDashboard />} />
     </Route>
   ),
   {
