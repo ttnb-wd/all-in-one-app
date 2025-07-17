@@ -54,7 +54,7 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${isMenuOpen ? 'open' : ''}`} ref={navRef}>
       <div className="nav-brand">
-        <Link to="/" onClick={closeDropdowns}>Portfolio</Link>
+        <Link to="/">Portfolio</Link>
       </div>
       <button className="nav-toggle" onClick={toggleMenu}>
         <span></span>
