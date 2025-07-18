@@ -1,39 +1,11 @@
-/* Base theme variables */
-:root {
-  /* Light theme */
-  --light-bg: #ffffff;
-  --light-text: #e0d3d3;
-  --light-text-secondary: rgba(26, 26, 26, 0.7);
-  --light-border: rgba(26, 26, 26, 0.1);
-  --light-card-bg: rgba(255, 255, 255, 0.8);
-  --light-input-bg: rgba(26, 26, 26, 0.05);
-  --light-shadow: rgba(0, 0, 0, 0.1);
-  
-  /* Dark theme */
-  --dark-bg: #0a192f;
-  --dark-text: #ffffff;
-  --dark-text-secondary: rgba(255, 255, 255, 0.7);
-  --dark-border: rgba(255, 255, 255, 0.1);
-  --dark-card-bg: rgba(255, 255, 255, 0.05);
-  --dark-input-bg: rgba(255, 255, 255, 0.1);
-  --dark-shadow: rgba(0, 0, 0, 0.3);
-}
-
-/* Theme-aware styles */
-[data-theme='light'] .contact-container {
-  background-color: var(--light-bg);
-  color: var(--light-text);
-}
-
-[data-theme='dark'] .contact-container {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-}
+/* Remove conflicting theme variables - use global ones from index.css */
 
 .contact-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  color: var(--text-primary);
+    background-color: var(--bg-primary);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -79,8 +51,8 @@
   line-height: 1.8;
 }
 
-[data-theme='light'] .contact-info p {
-  color: var(--light-text-secondary);
+.contact-info p {
+  color: var(--text-secondary);
 }
 
 [data-theme='dark'] .contact-info p {

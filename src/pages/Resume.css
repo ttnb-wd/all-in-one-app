@@ -2,8 +2,9 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  color: white;
+  color: var(--text-primary);
   min-height: 100vh;
+  transition: color var(--theme-transition);
 }
 
 .resume-header {

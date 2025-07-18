@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { FaHome, FaUser, FaBriefcase, FaEnvelope, FaGamepad, FaTools, FaBlog, FaShoppingCart, FaStore, FaFileAlt } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
+import ThemeToggle from './ThemeToggle';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -134,6 +135,7 @@ const Navbar = () => {
             <span className="cart-count">{getCartItemsCount()}</span>
           )}
         </Link>
+        <ThemeToggle />
       </div>
       {(isMenuOpen || gamesOpen || appsOpen) && (
         <div className="navbar-overlay" onClick={closeDropdowns} />

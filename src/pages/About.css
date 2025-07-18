@@ -2,8 +2,9 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  color: white;
+  color: var(--text-primary);
   min-height: 100vh;
+  transition: color var(--theme-transition);
 }
 
 .about-header {
@@ -112,7 +113,7 @@
   
   .bio-intro {
     font-size: 1.3rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
   line-height: 1.7;
     margin-bottom: 1.5rem;
     font-weight: 500;
@@ -120,7 +121,7 @@
 
 .bio-content p {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
   line-height: 1.8;
   margin-bottom: 1.5rem;
 }

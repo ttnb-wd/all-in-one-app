@@ -1,11 +1,12 @@
 body {
   font-family: 'Poppins', 'Roboto', sans-serif;
-  background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+  background: var(--bg-primary);
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  color: #000;
+  color: var(--text-primary);
   overflow-x: hidden;
+  transition: background-color var(--theme-transition), color var(--theme-transition);
 }
 
 /* New hero section styles */
@@ -18,7 +19,8 @@ body {
   padding: 2rem;
   opacity: 0;
   animation: fadeIn 1s ease-in forwards;
-  color: #000;
+  color: var(--text-primary);
+    transition: color var(--theme-transition);
 }
 
 @keyframes fadeIn {
@@ -27,15 +29,16 @@ body {
 }
 
 .hero-content {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   padding: 2.5rem;
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px var(--shadow-color);
   transform: perspective(1000px);
-  transition: transform 0.3s ease;
-  color: #000;
+  transition: transform 0.3s ease, background-color var(--theme-transition), box-shadow var(--theme-transition);
+    color: var(--text-primary);
   font-family: 'Poppins', sans-serif;
+  border: 1px solid var(--border-color);
 }
 
 .hero-content:hover {
@@ -44,16 +47,17 @@ body {
 
 .greeting-text {
   font-size: 1.8rem;
-  color: #000;
+  color: var(--text-secondary);
   font-weight: 600;
   margin-bottom: 1rem;
   font-family: 'Playfair Display', serif;
   letter-spacing: -0.5px;
+  transition: color var(--theme-transition);
 }
 
 .name-text {
   font-size: 4rem;
-  background: linear-gradient(45deg, #1a1a1a, #333333);
+  background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

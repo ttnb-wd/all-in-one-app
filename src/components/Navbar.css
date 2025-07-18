@@ -121,7 +121,7 @@
   display: none;
   background: none;
   border: none;
-  color: white;
+  color: var(--text-primary);
   font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -265,7 +265,7 @@
 }
 
 .games-dropdown .nav-item {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
   text-decoration: none;
   display: flex;
   align-items: center;
